@@ -5,7 +5,7 @@
 #include <string.h>															/*头文件*/
 #include <stdlib.h>															/*头文件*/
 # pragma comment (lib, "Winmm.lib")
-void Checkin( );
+void Checkin( );															/*函数原型声明*/
 void Delete();
 void modify();
 void Room();
@@ -78,7 +78,7 @@ void display()																/*显示所有客户信息*/
 		for(i=0;i<nums;i++)
 		printf("%10s%10s%10s%20s\n\n",guests[i].room,guests[i].name,guests[i].sex,guests[i].id);
 		printf("-----------------------------------------------------------\n\n");
-		printf("              留在此界面请按N，返回主界面按其他任意键");
+		printf("              返回主界面按回车键");
 	}
 	while (getchar()=='N'||getchar()=='n');
 
@@ -116,7 +116,7 @@ void main( )																/*主程序*/
 	system("cls");
 	switch(m)
 	{
-	case 1:
+	case 1:																	/*增加客户记录*/
 		{
 			system("cls");
 			dqsj();
@@ -146,7 +146,7 @@ void main( )																/*主程序*/
 			getchar();
 			switch(b)
 			{
-				case 1:
+				case 1:														/*单人间*/
 					printf("              请输入预订天数:");
 					scanf("%d",&x);
 					printf("\n");
@@ -168,7 +168,7 @@ void main( )																/*主程序*/
 					  case 2:break;}
 					  system("cls");
 					  break;
-				case 2:
+				case 2:														/*双人间*/
 					printf("              请输入预订天数:");
 					scanf("%d",&x);
 					printf("\n");
@@ -190,7 +190,7 @@ void main( )																/*主程序*/
 					 case 2:break;}
 					 system("cls");
 					 break;
-				case 3:
+				case 3:														/*标准间*/
 					printf("              请输入预订天数:");
 					scanf("%d",&x);
 					printf("\n");
@@ -211,7 +211,7 @@ void main( )																/*主程序*/
 					 case 2:break;}
 					 system("cls");
 					 break;
-				case 4:
+				case 4:														/*总统套房*/
 					printf("              请输入预订天数:");
 					scanf("%d",&x);
 					printf("\n");
@@ -236,12 +236,12 @@ void main( )																/*主程序*/
 			}
 			
 		}break;
-	case 2:modify();break;
-	case 3:Delete();break;
-	case 4:Room();break;
-	case 5:informationservices( );break;
-	case 6:display();break;
-	case 0:exit(0);
+	case 2:modify();break;													/*修改客户记录*/
+	case 3:Delete();break;													/*删除客户记录*/
+	case 4:Room();break;													/*按客户房间查询*/
+	case 5:informationservices( );break;									/*按客户信息查询*/
+	case 6:display();break;													/*输出所有客户信息*/
+	case 0:exit(0);															/*退出系统*/
 	default:printf("           您输入有误，请重新输入");
 		system("cls");}														/*清屏*/
 	WriteInfo();}
@@ -431,7 +431,7 @@ void dqsj()																	/*显示北京时间*/
     }
 void bjyy()  
     {  
-		sndPlaySound("水木年华 - 一生有你.wav",SND_ASYNC);          /*播放背景音乐*/ 
+		sndPlaySound("You Took My Heart Away 无损.wav",SND_ASYNC);          /*播放背景音乐*/ 
     }    
 
 void ReadInfo()																/*将客户信息从文件读出*/
@@ -447,7 +447,7 @@ void ReadInfo()																/*将客户信息从文件读出*/
 	else
 		for(i=0;i<nums;i++)
 			fread(&guests[i],sizeof(struct Check),1,fp);
-		fclose(fp);
+		fclose(fp);															/*关闭文件*/
 }
 void WriteInfo()															/*将客户信息写入文件*/
 {
@@ -463,5 +463,5 @@ void WriteInfo()															/*将客户信息写入文件*/
 	for(i=0;i<nums;i++)
 		if(fwrite(&guests[i],sizeof(struct Check),1,fp)!=1)
 			printf("写入文件错误！\n");
-	fclose(fp);
+	fclose(fp);																/*关闭文件*/
 }
